@@ -22,7 +22,11 @@
             </div>
         </div>
     </div>
-    <div>
+    <div th:if="${bookDtoList.empty}">
+        <hr>
+        등록된 도서가 없습니다.
+    </div>
+    <div th:unless="${bookDtoList.empty}">
         <hr>
         <form th:action="@{/main}" th:object="${searchForm}" method="get" class="d-flex align-items-end justify-content-end">
             <div class="row">
@@ -61,7 +65,7 @@
             </tr>
             </tbody>
         </table>
-        <div th:unless="${bookDtoList.empty}">
+        <div>
             <ul class="pagination pagination-sm justify-content-center">
                 <li class="page-item" th:class="${bookDtoList.hasPrevious() ? '' : 'disabled'}">
                     <a class="page-link" th:href="@{${url}(page=${bookDtoList.number - 1}, size=${bookDtoList.size})}">Previous</a>
