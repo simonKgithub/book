@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <title>도서대출</title>
+    <style>
+        p{
+            color: red;
+            font-size: small;
+        }
+        .readonly{
+            background-color: #ebe9e9;
+        }
+    </style>
+</head>
+<body class="p-3 mb-2 bg-body-tertiary">
+    <h3>도서대출페이지</h3>
+    <hr>
+    <span th:text="${error}"></span>
+    <form th:action="@{/manage/loan}" method="post" th:object="${loanDto}">
+        <div class="row">
+            <div class="col input-group mb-3">
+                <label class="input-group-text" th:for="bookIsbn">#ISBN</label>
+                <input class="form-control readonly" th:type="text" th:field="*{bookIsbn}" th:readonly="true">
+            </div>
+            <div class="col">
+                <p th:if="${#fields.hasErrors('bookIsbn')}" th:errors="*{bookIsbn}">Invalid data</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col input-group mb-3">
+                <label class="input-group-text" th:for="loanReceiver">대출인</label>
+                <input class="form-control" th:type="text" th:field="*{loanReceiver}" th:value="*{loanReceiver}" maxlength="10">
+            </div>
+            <div class="col">
+                <p th:if="${#fields.hasErrors('loanReceiver')}" th:errors="*{loanReceiver}">Invalid data</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col input-group mb-3">
+                <label class="input-group-text" th:for="loanPhone">연락처</label>
+                <input class="form-control" th:type="text" th:field="*{loanPhone}" th:value="*{loanPhone}" maxlength="11">
+            </div>
+            <div class="col">
+                <p th:if="${#fields.hasErrors('loanPhone')}" th:errors="*{loanPhone}">Invalid data</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col input-group mb-3">
+                <label class="input-group-text" th:for="loanStart">시작일</label>
+                <input class="form-control" th:type="text" th:field="*{loanStart}" maxlength="8">
+            </div>
+            <div class="col">
+                <p th:if="${#fields.hasErrors('loanStart')}" th:errors="*{loanStart}">Invalid data</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col input-group mb-3">
+                <label class="input-group-text" th:for="loanEnd">반납(예정)일</label>
+                <input class="form-control" th:type="text" th:field="*{loanEnd}" maxlength="8">
+            </div>
+            <div class="col">
+                <p th:if="${#fields.hasErrors('loanEnd')}" th:errors="*{loanEnd}">Invalid data</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col input-group mb-3">
+                <label class="input-group-text" th:for="loanReason">대출사유</label>
+                <select class="form-select" th:field="*{loanReason}">
+                    <option selected value="">--선택--</option>
+                    <option value="흥미">흥미</option>
+                    <option value="레퍼런스">레퍼런스</option>
+                    <option value="전공지식">전공지식</option>
+                    <option value="기타">기타</option>
+                </select>
+            </div>
+            <div class="col"></div>
+        </div>
+        <button th:type="submit" class="btn btn-outline-primary">도서 대출 하기</button>
+    </form>
+    <hr>
+    <button th:onclick="window.close()" class="btn btn-outline-danger">닫기</button></a>
+</body>
+<script>
+    window.onload = function(){
+        const queryString = window.location.search;
+        let urlSearchParams = new URLSearchParams(queryString);
+        let loan = urlSearchParams.get('loan');
+        if (loan === 'success') {
+            alert("대출이 완료되었습니다.");
+            window.opener.location.reload();
+            window.close();
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <title>메인</title>
+</head>
+<body class="p-3 mb-2 bg-body-tertiary">
+    <div class="row">
+        <div class="col">
+            <h3>메인페이지</h3>
+        </div>
+        <div class="col d-flex align-items-end justify-content-end">
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <span th:text="${#authentication.getPrincipal().getMemberNm()}"></span>님! 반가워요😊
+                <a th:href="@{/logout}"><button class="btn btn-outline-warning btn-sm">로그아웃</button></a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <hr>
+        <form th:action="@{/main}" th:object="${searchForm}" method="get" class="d-flex align-items-end justify-content-end">
+            <div class="row">
+                <div class="col input-group mb-3">
+                    <label class="input-group-text" for="bookNm">도서명</label>
+                    <input class="form-control" type="text" id="bookNm" th:field="*{bookNm}">
+                </div>
+                <div class="col input-group mb-3">
+                    <label class="input-group-text" for="bookAuthor">저자명</label>
+                    <input class="form-control" type="text" id="bookAuthor" th:field="*{bookAuthor}">
+                </div>
+                <div class="col">
+                    <button type="submit" class="w-50 btn btn-outline-primary">검색</button>
+                </div>
+            </div>
+        </form>
+        <table class="table table-striped table-hover table-border table-sm caption-top">
+            <caption>등록 도서 리스트</caption>
+            <thead class="table-light">
+            <tr>
+                <th scope="col"># ISBN</th>
+                <th scope="col">도서명</th>
+                <th scope="col">저자</th>
+                <th scope="col">출판사</th>
+                <th scope="col">대출가능여부</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="bookDto : ${bookDtoList.content}">
+                <td name="bookIsbn" th:text="*{bookDto.bookIsbn}">도서명</td>
+                <td name="bookNm" th:text="*{bookDto.bookNm}">도서명</td>
+                <td name="bookAuthor" th:text="*{bookDto.bookAuthor}">저자명</td>
+                <td name="bookPublisher" th:text="*{bookDto.bookPublisher}">출판사명</td>
+                <td name="isLoanable" th:if="*{bookDto.isLoanable}">가능</td>
+                <td name="isLoanable" th:unless="*{bookDto.isLoanable}">불가능</td>
+            </tr>
+            </tbody>
+        </table>
+        <div th:unless="${bookDtoList.empty}">
+            <ul class="pagination pagination-sm justify-content-center">
+                <li class="page-item" th:class="${bookDtoList.hasPrevious() ? '' : 'disabled'}">
+                    <a class="page-link" th:href="@{${url}(page=${bookDtoList.number - 1}, size=${bookDtoList.size})}">Previous</a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(0, bookDtoList.totalPages - 1)}"
+                    th:class="${bookDtoList.number == i ? 'active' : ''}">
+                    <a class="page-link" th:href="@{${url}(page=${i}, size=${bookDtoList.size})}" th:text="${i+1}">1</a>
+                </li>
+                <li class="page-item" th:class="${bookDtoList.hasNext() ? '' : 'disabled'}">
+                    <a class="page-link" th:href="@{${url}(page=${bookDtoList.number + 1}, size=${bookDtoList.size})}">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div sec:authorize="!isAuthenticated()">
+        <hr>
+        <a th:href="@{/member/login}"><button class="btn btn-outline-primary">로그인/회원가입</button></a>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <hr>
+        <a th:href="@{/manage/books}"><button class="btn btn-outline-secondary">도서관리하기</button></a>
+    </div>
+</body>
+</html>

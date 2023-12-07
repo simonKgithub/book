@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <title>도서등록</title>
+    <style>
+        p{
+            color: red;
+            font-size: small;
+        }
+    </style>
+</head>
+<body class="p-3 mb-2 bg-body-tertiary">
+    <h3>도서등록페이지</h3>
+    <hr>
+    <span th:text="${error}"></span>
+    <form th:action="@{/manage/addBook}" method="post" th:object="${bookDto}">
+        <div class="row">
+            <div class="col input-group mb-3">
+                <label class="input-group-text" th:for="bookIsbn">#ISBN</label>
+                <input class="form-control" th:type="text" th:field="*{bookIsbn}" th:maxlength="13">
+            </div>
+            <div class="col">
+                <p th:if="${#fields.hasErrors('bookIsbn')}" th:errors="*{bookIsbn}">Invalid data</p>
+                <p th:text="${duplication}"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col input-group mb-3">
+                <label class="input-group-text" th:for="bookNm">도서명</label>
+                <input class="form-control" th:type="text" th:field="*{bookNm}">
+            </div>
+            <div class="col">
+                <p th:if="${#fields.hasErrors('bookNm')}" th:errors="*{bookNm}">Invalid data</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col input-group mb-3">
+                <label class="input-group-text" th:for="bookAuthor">저자명</label>
+                <input class="form-control" th:type="text" th:field="*{bookAuthor}">
+            </div>
+            <div class="col">
+                <p th:if="${#fields.hasErrors('bookAuthor')}" th:errors="*{bookAuthor}">Invalid data</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col input-group mb-3">
+                <label class="input-group-text" th:for="bookPublisher">출판사명</label>
+                <input class="form-control" th:type="text" th:field="*{bookPublisher}">
+            </div>
+            <div class="col">
+                <p th:if="${#fields.hasErrors('bookPublisher')}" th:errors="*{bookPublisher}">Invalid data</p>
+            </div>
+        </div>
+        <button th:type="submit" class="btn btn-outline-primary">도서 등록 하기</button>
+    </form>
+    <hr>
+    <a href="/main"><button class="btn btn-outline-dark">메인으로</button></a>
+    <a href="/manage/books"><button class="btn btn-outline-dark">뒤로가기</button></a>
+
+</body>
+</html>

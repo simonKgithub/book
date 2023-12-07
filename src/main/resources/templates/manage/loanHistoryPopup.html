@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <title>대출이력</title>
+</head>
+<body class="p-3 mb-2 bg-body-tertiary">
+    <h3>도서대출이력페이지</h3>
+    <hr>
+        <div th:if="${loanHistoryDtoList.empty}">
+            대출 이력이 없습니다.
+        </div>
+        <div th:unless="${loanHistoryDtoList.empty}">
+            <table class="table table-striped table-hover table-border table-sm caption-top">
+                <caption>도서 대출 이력</caption>
+                <thead class="table-light">
+                <tr>
+                    <th scope="col">발생일</th>
+                    <th scope="col">대출인</th>
+                    <th scope="col">연락처</th>
+                    <th scope="col">대출사유</th>
+                    <th scope="col">도서상태</th>
+                    <th scope="col">관리자</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="loanHistoryDto : ${loanHistoryDtoList}">
+                    <td th:text="${loanHistoryDto.loanDate}">발생일</td>
+                    <td th:text="${loanHistoryDto.loanReceiver}">대출자</td>
+                    <td th:text="${loanHistoryDto.loanPhone}">연락처</td>
+                    <td th:text="${loanHistoryDto.loanReason}">대출사유</td>
+                    <td th:unless="${loanHistoryDto.loanable}">대출시작</td>
+                    <td th:if="${loanHistoryDto.loanable}">반납완료</td>
+                    <td th:text="${loanHistoryDto.loanManager}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    <hr>
+    <button th:onclick="window.close()" class="btn btn-outline-danger">닫기</button></a>
+</body>
+</html>
