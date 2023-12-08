@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col input-group mb-3">
                     <label class="input-group-text" th:for="memberId">아이디</label>
-                    <input class="form-control" th:type="text" th:field="*{memberId}">
+                    <input class="form-control" th:type="text" th:field="*{memberId}" maxlength="20">
                 </div>
                 <div class="col">
                     <p th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}">Invalid data</p>
@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="col input-group mb-3">
                     <label class="input-group-text" th:for="memberPw">비밀번호</label>
-                    <input class="form-control" th:type="password" th:field="*{memberPw}">
+                    <input class="form-control" th:type="password" th:field="*{memberPw}" maxlength="20">
                 </div>
                 <div class="col">
                     <p th:if="${#fields.hasErrors('memberPw')}" th:errors="*{memberPw}">Invalid data</p>
@@ -40,7 +40,7 @@
             <div class="row">
                 <div class="col input-group mb-3">
                     <label class="input-group-text" th:for="memberNm">이름</label>
-                    <input class="form-control" th:type="text" th:field="*{memberNm}">
+                    <input class="form-control" th:type="text" th:field="*{memberNm}" maxlength="20">
                 </div>
                 <div class="col">
                     <p th:if="${#fields.hasErrors('memberNm')}" th:errors="*{memberNm}">Invalid data</p>

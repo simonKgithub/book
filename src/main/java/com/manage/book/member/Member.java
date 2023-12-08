@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,13 +18,13 @@ import java.util.List;
 @Entity @Table(name = "member")
 @Getter @Setter @ToString
 public class Member implements UserDetails {
-    @Id @Column(name = "member_id")
+    @Id @Column(name = "member_id", length = 20)
     private String memberId;
 
-    @Column(name = "member_pw")
+    @Column(name = "member_pw", length = 255, nullable = false)
     private String memberPw;
 
-    @Column(name = "member_nm")
+    @Column(name = "member_nm", length = 20, nullable = false)
     private String memberNm;
 
     @Enumerated(EnumType.STRING)

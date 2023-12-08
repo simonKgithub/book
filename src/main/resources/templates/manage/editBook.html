@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col input-group mb-3">
                 <label class="input-group-text" th:for="bookNm">도서명</label>
-                <input class="form-control" th:type="text" th:field="*{bookNm}">
+                <input class="form-control" th:type="text" th:field="*{bookNm}" maxlength="20">
             </div>
             <div class="col">
                 <p th:if="${#fields.hasErrors('bookNm')}" th:errors="*{bookNm}">Invalid data</p>
@@ -45,7 +45,7 @@
         <div class="row">
             <div class="col input-group mb-3">
                 <label class="input-group-text" th:for="bookAuthor">저자명</label>
-                <input class="form-control" th:type="text" th:field="*{bookAuthor}">
+                <input class="form-control" th:type="text" th:field="*{bookAuthor}" maxlength="20">
             </div>
             <div class="col">
                 <p th:if="${#fields.hasErrors('bookAuthor')}" th:errors="*{bookAuthor}">Invalid data</p>
@@ -54,7 +54,7 @@
         <div class="row">
             <div class="col input-group mb-3">
                 <label class="input-group-text" th:for="bookPublisher">출판사명</label>
-                <input class="form-control" th:type="text" th:field="*{bookPublisher}">
+                <input class="form-control" th:type="text" th:field="*{bookPublisher}" maxlength="20">
             </div>
             <div class="col">
                 <p th:if="${#fields.hasErrors('bookPublisher')}" th:errors="*{bookPublisher}">Invalid data</p>
