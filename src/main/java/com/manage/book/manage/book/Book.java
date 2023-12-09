@@ -20,6 +20,9 @@ public class Book {
     @Column(name = "book_publisher", nullable = false, length = 20)
     private String bookPublisher;
 
+    @Column(name = "book_count", nullable = false)
+    private String bookCount;
+
     @Column(name = "book_loanable")
     private boolean isLoanable;
 

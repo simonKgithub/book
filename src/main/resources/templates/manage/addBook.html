@@ -17,7 +17,6 @@
 <body class="p-3 mb-2 bg-body-tertiary">
     <h3>도서등록페이지</h3>
     <hr>
-    <span th:text="${error}"></span>
     <form th:action="@{/manage/addBook}" method="post" th:object="${bookDto}">
         <div class="row">
             <div class="col input-group mb-3">
@@ -54,6 +53,16 @@
             </div>
             <div class="col">
                 <p th:if="${#fields.hasErrors('bookPublisher')}" th:errors="*{bookPublisher}">Invalid data</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col input-group mb-3">
+                <label class="input-group-text" th:for="bookCount">책수량</label>
+                <input class="form-control" th:type="text" th:field="*{bookCount}" maxlength="5">
+            </div>
+            <div class="col">
+                <p th:if="${#fields.hasErrors('bookCount')}" th:errors="*{bookCount}">Invalid data</p>
+                <p th:text="${error}"></p>
             </div>
         </div>
         <button th:type="submit" class="btn btn-outline-primary">도서 등록 하기</button>

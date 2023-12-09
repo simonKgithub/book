@@ -26,6 +26,9 @@ public class BookService {
         Member member = CommonUtils.getMember();
         String now = CommonUtils.getNow();
 
+        //수량 숫자 체크
+        isNumeric(bookDto.getBookCount());
+
         Book newBook = new Book();
         Book book = this.toEntity(newBook, bookDto);
         book.setRegistrant(member.getMemberId());
@@ -34,6 +37,7 @@ public class BookService {
         validation(book);
         return bookRepository.save(book);
     }
+
     /**
      * 조회: 도서 다건 (페이징 처리-1)
      * @return
@@ -103,7 +107,18 @@ public class BookService {
         book.setBookNm(bookDto.getBookNm());
         book.setBookAuthor(bookDto.getBookAuthor());
         book.setBookPublisher(bookDto.getBookPublisher());
+        book.setBookCount(bookDto.getBookCount());
         book.setLoanable(true);
         return book;
+    }
+
+    /**
+     * 책 수량 유효성 검즘
+     * @param bookCount
+     */
+    private static void isNumeric(String bookCount) {
+        if (!bookCount.matches("\\d+")) {
+            throw new IllegalStateException("책 수량은 숫자만 적어주세요.");
+        }
     }
 }

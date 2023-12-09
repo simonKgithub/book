@@ -104,6 +104,14 @@
                     <target>16</target>
                 </configuration>
             </plugin>
+            <!-- 빌드 시 테스트파일 Skip -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

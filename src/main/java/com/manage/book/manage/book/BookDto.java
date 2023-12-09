@@ -18,6 +18,8 @@ public class BookDto {
     public String bookAuthor;
     @NotEmpty(message = "출판사를 입력해주세요.")
     public String bookPublisher;
+    @NotEmpty(message = "수량을 입력해주세요.")
+    public String bookCount;
 
 
     public boolean isLoanable;
@@ -34,6 +36,7 @@ public class BookDto {
         bookDto.setBookNm(book.getBookNm());
         bookDto.setBookAuthor(book.getBookAuthor());
         bookDto.setBookPublisher(book.getBookPublisher());
+        bookDto.setBookCount(book.getBookCount());
         bookDto.setLoanable(book.isLoanable());
         bookDto.setRegistrant(book.getRegistrant());
         bookDto.setRegDate(book.getRegDate());
