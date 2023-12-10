@@ -6,7 +6,7 @@ on:
   push:
     branches: [ main ] # main brance로 push 될 때 실행됨
   pull_request:
-    branches" [ main ] # main branche로 pull request 될 때 실행됩니다.
+    branches: [ main ] # main branche로 pull request 될 때 실행됩니다.
 
 # workflow 는 한개 이상의 job을 가지며, 각 job은 여러 step에 따라 단계를 나눌 수 있음
 jobs:
