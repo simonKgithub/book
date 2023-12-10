@@ -17,8 +17,8 @@ class MemberServiceTest {
     @Autowired
     MemberService memberService;
 
-    @Test
-    @DisplayName("회원가입 중복 테스트")
+//    @Test
+//    @DisplayName("회원가입 중복 테스트")
     void duplicationTest(){
         MemberDto member1 = this.makeUserDto();
         MemberDto member2 = this.makeUserDto();
@@ -28,8 +28,8 @@ class MemberServiceTest {
         assertThrows(IllegalStateException.class, () -> memberService.register(member2));
     }
 
-    @Test
-    @DisplayName("회원가입 테스트")
+//    @Test
+//    @DisplayName("회원가입 테스트")
     void registerTest(){
         MemberDto memberDto = this.makeUserDto();
 

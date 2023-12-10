@@ -20,7 +20,7 @@ public class MainController {
 
     private final BookService bookService;
 
-    @GetMapping("/main")
+    @GetMapping({"/main", "/"})
     public String main(@AuthenticationPrincipal Member member, Model model,
                        @ModelAttribute("searchForm") SearchForm searchForm,
                        @PageableDefault(size = 5) Pageable pageable){
