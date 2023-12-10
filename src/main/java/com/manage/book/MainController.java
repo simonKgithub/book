@@ -5,6 +5,7 @@ import com.manage.book.manage.book.BookService;
 import com.manage.book.manage.book.SearchForm;
 import com.manage.book.member.Member;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
+@Slf4j
 @RequiredArgsConstructor
 public class MainController {
 
@@ -25,7 +27,6 @@ public class MainController {
                        @ModelAttribute("searchForm") SearchForm searchForm,
                        @PageableDefault(size = 5) Pageable pageable){
         model.addAttribute("member", member);
-        System.out.println("배포 테스트");
         Page<Book> bookDtoList;
         //페이징 처리
         if (searchForm != null &&
@@ -35,6 +36,7 @@ public class MainController {
             bookDtoList = bookService.findBooks(pageable);
         }
         model.addAttribute("bookDtoList", bookDtoList);
+        log.info("===============자동 배포 테스트===============");
         return "main";
     }
 }
