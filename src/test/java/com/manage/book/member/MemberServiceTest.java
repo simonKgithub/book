@@ -36,8 +36,8 @@ class MemberServiceTest {
         Member saved = memberService.register(memberDto);
 
         assertEquals(saved.getMemberId(), memberDto.getMemberId());
-        //assertEquals(saved.getMemberPw(), memberDto.getMemberPw());
-        assertEquals(saved.getMemberNm(), memberDto.getMemberNm());
+//        assertEquals(saved.getMemberPw(), memberDto.getMemberPw());
+//        assertEquals(saved.getMemberNm(), memberDto.getMemberNm());
         assertEquals(saved.getRole(), Role.ADMIN);
     }
 
