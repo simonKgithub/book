@@ -23,6 +23,9 @@ class MemberServiceTest {
         MemberDto member1 = this.makeUserDto();
         MemberDto member2 = this.makeUserDto();
         System.out.println("test333");
+        System.out.println("test333");
+        System.out.println("test333");
+        System.out.println("test333");
         memberService.register(member1);
 
         assertThrows(IllegalStateException.class, () -> memberService.register(member2));
