@@ -22,7 +22,7 @@ class MemberServiceTest {
     void duplicationTest(){
         MemberDto member1 = this.makeUserDto();
         MemberDto member2 = this.makeUserDto();
-
+        System.out.println("test");
         memberService.register(member1);
 
         assertThrows(IllegalStateException.class, () -> memberService.register(member2));
