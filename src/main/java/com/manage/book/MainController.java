@@ -36,7 +36,6 @@ public class MainController {
             bookDtoList = bookService.findBooks(pageable);
         }
         model.addAttribute("bookDtoList", bookDtoList);
-        log.info("===============자동 배포 테스트222===============");
         return "main";
     }
 }
