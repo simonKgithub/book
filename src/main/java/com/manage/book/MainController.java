@@ -25,7 +25,7 @@ public class MainController {
                        @ModelAttribute("searchForm") SearchForm searchForm,
                        @PageableDefault(size = 5) Pageable pageable){
         model.addAttribute("member", member);
-
+        System.out.println("배포 테스트");
         Page<Book> bookDtoList;
         //페이징 처리
         if (searchForm != null &&
